@@ -1740,6 +1740,7 @@ button { font: inherit; color: inherit; }
     radial-gradient(80% 50% at 0% 100%, rgba(74, 15, 11, 0.5), transparent 70%),
     var(--red);
   overflow: hidden;
+  overflow: clip; /* clip không phá position: sticky của cột trái như hidden */
 }
 .chapter-four .chapter-heading h2 { max-width: 26ch; }
 
@@ -1827,7 +1828,7 @@ button { font: inherit; color: inherit; }
   position: relative;
   display: grid;
   place-items: center;
-  width: min(100%, 420px);
+  width: min(100%, 420px, calc(100svh - var(--header-h) - 15rem));
   aspect-ratio: 1;
   margin: 1.5rem 0 2rem;
   border-radius: 50%;
