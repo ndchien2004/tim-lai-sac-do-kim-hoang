@@ -65,13 +65,10 @@ document.addEventListener("click", (e) => {
    Header: trạng thái cuộn, nền tối/đỏ, ẩn khi cuộn xuống
    -------------------------------------------------------------------------- */
 const header = $("#siteHeader");
-const bar = $("#readingBar");
 let lastY = window.scrollY;
 
 function onScroll() {
   const y = window.scrollY;
-  const max = document.documentElement.scrollHeight - window.innerHeight;
-  bar.style.transform = `scaleX(${max > 0 ? Math.min(1, y / max) : 0})`;
   header.classList.toggle("scrolled", y > 24);
   const menuOpen = root.classList.contains("menu-open");
   if (!menuOpen) header.classList.toggle("is-hidden", y > lastY + 4 && y > window.innerHeight * 0.9);
