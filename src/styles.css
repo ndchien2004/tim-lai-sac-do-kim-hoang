@@ -5,7 +5,9 @@
 
 :root {
   /* Màu */
-  --paper: #f4ead9;
+  --page: #ffffff;        /* nền trang */
+  --surface: #f7f2ea;     /* nền thẻ trên trang trắng */
+  --paper: #f4ead9;       /* màu giấy: chữ sáng trên nền đỏ/tối */
   --paper-2: #eadbc2;
   --paper-3: #dfc9a8;
   --ink: #1c1310;
@@ -45,6 +47,9 @@
 *::after { box-sizing: border-box; }
 
 html {
+  /* số thẳng hàng (Playfair mặc định dùng số kiểu cũ: 0 trông như o).
+     Dùng font-feature-settings vì shorthand `font:` không reset nó. */
+  font-feature-settings: "lnum" 1;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   scroll-padding-top: var(--header-h);
@@ -55,7 +60,7 @@ html.lenis, html.lenis body { height: auto; }
 
 body {
   margin: 0;
-  background: var(--paper);
+  background: var(--page);
   color: var(--ink);
   font-family: var(--f-text);
   font-size: clamp(1.0625rem, 0.98rem + 0.32vw, 1.25rem);
@@ -110,7 +115,7 @@ button { font: inherit; color: inherit; }
   inset: 0;
   z-index: 90;
   pointer-events: none;
-  opacity: 0.22;
+  opacity: 0.1;
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .18 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
@@ -153,7 +158,7 @@ button { font: inherit; color: inherit; }
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: var(--paper);
+  background: var(--page);
   backdrop-filter: blur(16px) saturate(1.2);
   -webkit-backdrop-filter: blur(16px) saturate(1.2);
   border-bottom: 1px solid var(--line);
@@ -421,7 +426,7 @@ button { font: inherit; color: inherit; }
   color: var(--red);
 }
 
-.paper-section { background: var(--paper); color: var(--ink); position: relative; }
+.paper-section { background: var(--page); color: var(--ink); position: relative; }
 .dark-section { background: var(--night); color: var(--paper); position: relative; }
 .red-section { background: var(--red); color: var(--paper); position: relative; }
 
@@ -500,7 +505,7 @@ button { font: inherit; color: inherit; }
   position: absolute;
   inset: auto 0 -1px;
   height: 28px;
-  background: var(--paper);
+  background: var(--page);
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 28' preserveAspectRatio='none'%3E%3Cpath d='M0 28V14c40-4 70 3 110-1s60-8 110-3 80 6 130 1 70-9 120-4 90 7 140 2 70-6 120-2 80 6 130 2 90-8 140-4 60 5 100 3V28z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 28' preserveAspectRatio='none'%3E%3Cpath d='M0 28V14c40-4 70 3 110-1s60-8 110-3 80 6 130 1 70-9 120-4 90 7 140 2 70-6 120-2 80 6 130 2 90-8 140-4 60 5 100 3V28z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
   z-index: 3;
@@ -847,7 +852,7 @@ button { font: inherit; color: inherit; }
   bottom: clamp(1rem, 3vw, 2.5rem);
   max-width: 21rem;
   padding: 1rem 1.25rem;
-  background: rgba(244, 234, 217, 0.92);
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-left: 3px solid var(--red);
@@ -1075,7 +1080,7 @@ button { font: inherit; color: inherit; }
   border-radius: var(--radius);
   background:
     radial-gradient(circle at 44% 50%, rgba(169, 35, 27, 0.08), transparent 55%),
-    var(--paper-2);
+    var(--surface);
   border: 1px solid var(--line);
   overflow: hidden;
 }
@@ -1716,12 +1721,12 @@ button { font: inherit; color: inherit; }
 }
 .person-card {
   padding: clamp(1.5rem, 2.6vw, 2.25rem);
-  background: var(--paper-2);
+  background: var(--surface);
   border-radius: var(--radius);
   border: 1px solid transparent;
   transition: border-color 0.5s, transform 0.6s var(--ease-out), background-color 0.5s;
 }
-.person-card:hover { border-color: var(--red); transform: translateY(-6px); background: #efe2cb; }
+.person-card:hover { border-color: var(--red); transform: translateY(-6px); background: #f3ebdf; }
 .person-mark {
   position: relative;
   display: grid;
