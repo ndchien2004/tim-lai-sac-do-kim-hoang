@@ -256,8 +256,6 @@ if (animate) {
     line.replaceWith(mask);
     mask.appendChild(line);
   });
-  const roosterPaths = $$(".hero-rooster g:first-child path");
-  prepStroke(roosterPaths);
 
   gsap.set([".hero-content", ".scroll-cue", ".hero-caption"], { autoAlpha: 1 });
   const intro = gsap.timeline({ defaults: { ease: "expo.out" }, delay: 0.15 });
@@ -266,8 +264,9 @@ if (animate) {
     .from(".hero-grid", { autoAlpha: 0, duration: 2 }, 0.2)
     .from(".hero .eyebrow", { y: 20, autoAlpha: 0, duration: 1.1 }, 0.35)
     .from(".hero h1 .line-mask > *", { yPercent: 110, duration: 1.4, stagger: 0.12 }, 0.4)
-    .to(roosterPaths, { strokeDashoffset: 0, duration: 2.4, ease: "power2.inOut", stagger: 0.08 }, 0.5)
-    .from(".hero-rooster .seal-marks", { scale: 1.8, rotate: -18, autoAlpha: 0, transformOrigin: "132px 135px", duration: 0.9, ease: "back.out(2)" }, 1.6)
+    .from(".hero-photo-frame", { y: 80, rotate: 12, autoAlpha: 0, duration: 1.8 }, 0.45)
+    .from(".hero-photo figcaption", { y: 12, autoAlpha: 0, duration: 1 }, 1.3)
+    .from(".hero-photo-seal", { scale: 1.9, rotate: -40, autoAlpha: 0, duration: 0.8, ease: "back.out(2.2)" }, 1.45)
     .from(".hero-deck", { y: 24, autoAlpha: 0, duration: 1.2 }, 0.95)
     .from(".byline", { y: 18, autoAlpha: 0, duration: 1.1 }, 1.1)
     .from([".scroll-cue", ".hero-caption"], { y: 14, autoAlpha: 0, duration: 1, stagger: 0.1 }, 1.4);
@@ -275,7 +274,8 @@ if (animate) {
   /* ----- Hero: parallax khi cuộn ----- */
   const heroST = { trigger: ".hero", start: "top top", end: "bottom top", scrub: true };
   gsap.to(".hero-sun", { yPercent: 28, scale: 1.12, ease: "none", scrollTrigger: heroST });
-  gsap.to(".hero-rooster", { yPercent: 16, ease: "none", scrollTrigger: heroST });
+  gsap.to(".hero-photo", { yPercent: 12, ease: "none", scrollTrigger: heroST });
+  gsap.to(".hero-photo-frame", { rotate: -2, ease: "none", scrollTrigger: heroST });
   gsap.to(".hero-content", { yPercent: -18, autoAlpha: 0.15, ease: "none", scrollTrigger: { ...heroST, start: "20% top" } });
   gsap.to(".hero-ink--one", { yPercent: -30, ease: "none", scrollTrigger: heroST });
   gsap.to(".hero-ink--two", { yPercent: 40, ease: "none", scrollTrigger: heroST });
@@ -389,6 +389,10 @@ if (animate) {
     .to(demo, { v: 22, duration: 0.9, ease: "power2.inOut", onUpdate: () => setCompare(demo.v) })
     .to(demo, { v: 74, duration: 1.1, ease: "power2.inOut", onUpdate: () => setCompare(demo.v) })
     .to(demo, { v: 50, duration: 0.8, ease: "power2.inOut", onUpdate: () => setCompare(demo.v) });
+
+  $$(".step-photo img").forEach((img) => {
+    gsap.fromTo(img, { clipPath: "inset(0 0 100% 0)", scale: 1.12 }, { clipPath: "inset(0 0 0% 0)", scale: 1, duration: 1.4, ease: "expo.out", scrollTrigger: { trigger: img, start: "top 85%", once: true } });
+  });
 
   /* ----- Phần 05 ----- */
   gsap.from(".desks i", { y: 50, rotateX: 70, autoAlpha: 0, stagger: { each: 0.08, grid: [2, 3], from: "start" }, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: ".classroom-visual", start: "top 75%", once: true } });
