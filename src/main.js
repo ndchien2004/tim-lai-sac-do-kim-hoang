@@ -374,10 +374,16 @@ if (animate) {
   gsap.from(".portrait-word", { yPercent: 30, autoAlpha: 0, duration: 1.6, ease: "expo.out", scrollTrigger: { trigger: portrait, start: "top 70%", once: true } });
   gsap.fromTo(".portrait-silhouette", { yPercent: 8 }, { yPercent: -4, ease: "none", scrollTrigger: { trigger: portrait, start: "top bottom", end: "bottom top", scrub: true } });
 
-  const mapPaths = $$(".map-card svg path");
+  const mapPaths = $$(".map-card .map-river, .map-card .map-dike");
   prepStroke(mapPaths);
-  gsap.to(mapPaths, { strokeDashoffset: 0, duration: 2.2, ease: "power2.inOut", stagger: 0.2, scrollTrigger: { trigger: ".map-card", start: "top 75%", once: true } });
-  gsap.from(".map-pin", { y: 20, autoAlpha: 0, duration: 1, ease: "back.out(1.8)", delay: 1, scrollTrigger: { trigger: ".map-card", start: "top 75%", once: true } });
+  const mapTl = gsap.timeline({ scrollTrigger: { trigger: ".map-card", start: "top 75%", once: true } });
+  mapTl
+    .to(mapPaths, { strokeDashoffset: 0, duration: 1.8, ease: "power2.inOut", stagger: 0.2 }, 0)
+    .from(".map-flood", { scale: 0.6, autoAlpha: 0, transformOrigin: "40% 60%", duration: 1.4, ease: "expo.out" }, 0.8)
+    .from(".map-break", { scale: 0, transformOrigin: "50% 50%", duration: 0.6, ease: "back.out(3)" }, 1.4)
+    .from(".map-place, .map-t", { autoAlpha: 0, y: 8, stagger: 0.06, duration: 0.7, ease: "power2.out" }, 1.1);
+  // nét đê giữ kiểu gạch đứt sau khi vẽ xong
+  mapTl.call(() => $$(".map-card .map-dike").forEach((d) => { d.style.strokeDasharray = ""; d.style.strokeDashoffset = ""; }));
 
   gsap.from(".color-swatches span", { y: 50, rotate: (i) => (i % 2 ? 8 : -8), autoAlpha: 0, stagger: 0.1, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: ".color-swatches", start: "top 90%", once: true } });
   gsap.fromTo(".red-paper-manifesto strong", { scale: 0.86, letterSpacing: "0.02em" }, { scale: 1, letterSpacing: "-0.04em", ease: "none", scrollTrigger: { trigger: ".red-paper-manifesto", start: "top 90%", end: "center 50%", scrub: true } });
@@ -411,6 +417,10 @@ if (animate) {
   $$(".step-photo img").forEach((img) => {
     gsap.fromTo(img, { clipPath: "inset(0 0 100% 0)", scale: 1.12 }, { clipPath: "inset(0 0 0% 0)", scale: 1, duration: 1.4, ease: "expo.out", scrollTrigger: { trigger: img, start: "top 85%", once: true } });
   });
+
+  gsap.from(".contrast-col", { y: 40, autoAlpha: 0, stagger: 0.15, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: ".contrast-band", start: "top 85%", once: true } });
+  gsap.from(".glyph", { y: 30, rotate: (i) => [-6, 4, 8][i], autoAlpha: 0, stagger: 0.12, duration: 1.1, ease: "back.out(1.6)", scrollTrigger: { trigger: ".glyph-card", start: "top 80%", once: true } });
+  gsap.from(".hand-steps li", { y: 24, autoAlpha: 0, stagger: 0.12, duration: 0.9, ease: "expo.out", scrollTrigger: { trigger: ".hand-steps", start: "top 85%", once: true } });
 
   /* ----- Phần 05 ----- */
   gsap.from(".desks i", { y: 50, rotateX: 70, autoAlpha: 0, stagger: { each: 0.08, grid: [2, 3], from: "start" }, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: ".classroom-visual", start: "top 75%", once: true } });
