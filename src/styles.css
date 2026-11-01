@@ -203,6 +203,7 @@ button { font: inherit; color: inherit; }
 }
 
 .chapter-nav {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 0.25rem;
@@ -227,25 +228,57 @@ button { font: inherit; color: inherit; }
   opacity: 0.55;
   font-variant-numeric: tabular-nums;
 }
-.chapter-nav a::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 0.2rem;
-  width: 4px;
-  height: 4px;
-  margin-left: -2px;
-  border-radius: 50%;
-  background: currentColor;
-  transform: scale(0);
-  transition: transform 0.4s var(--ease-out);
-}
 .chapter-nav a:hover { background: rgba(127, 100, 80, 0.12); }
-.chapter-nav a.active { color: var(--red-2); }
-.chapter-nav a.active i { opacity: 1; }
-.chapter-nav a.active::after { transform: scale(1); }
-.on-dark .chapter-nav a.active,
-.site-header:not(.scrolled) .chapter-nav a.active { color: var(--gold); }
+.chapter-nav a.active,
+.chapter-nav a.active:hover { color: var(--nav-active-fg); background: transparent; }
+.chapter-nav a.active i { opacity: 0.85; }
+
+/* Con dấu trượt sau mục đang đọc */
+.site-header {
+  --nav-active-bg: var(--paper);
+  --nav-active-fg: var(--red);
+  --nav-active-ring: rgba(169, 35, 27, 0.35);
+}
+.site-header.scrolled {
+  --nav-active-bg: var(--red);
+  --nav-active-fg: var(--paper);
+  --nav-active-ring: rgba(244, 234, 217, 0.55);
+}
+.site-header.scrolled.on-dark {
+  --nav-active-bg: var(--paper);
+  --nav-active-fg: var(--ink);
+  --nav-active-ring: rgba(28, 19, 16, 0.3);
+}
+.site-header.scrolled.on-red {
+  --nav-active-bg: var(--paper);
+  --nav-active-fg: var(--red-deep);
+  --nav-active-ring: rgba(124, 22, 17, 0.35);
+}
+.nav-indicator {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  z-index: 0;
+  width: var(--w, 0px);
+  height: 2.15rem;
+  border-radius: 5px;
+  background: var(--nav-active-bg);
+  box-shadow:
+    inset 0 0 0 2px var(--nav-active-bg),
+    inset 0 0 0 3px var(--nav-active-ring),
+    0 6px 14px -8px rgba(28, 19, 16, 0.55);
+  transform: translate(var(--x, 0px), -50%) rotate(-1.5deg);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 0.6s var(--ease-out),
+    width 0.6s var(--ease-out),
+    opacity 0.35s var(--ease-out),
+    background-color 0.45s,
+    box-shadow 0.45s;
+}
+.nav-indicator.is-visible { opacity: 1; }
+.chapter-nav a { z-index: 1; }
 
 .header-note {
   flex-shrink: 0;
@@ -331,7 +364,7 @@ button { font: inherit; color: inherit; }
     transition: opacity 0.5s var(--ease-out), transform 0.7s var(--ease-out);
   }
   .chapter-nav a i { font: 600 0.8rem/1 var(--f-ui); opacity: 0.6; transform: translateY(-0.9em); }
-  .chapter-nav a::after { display: none; }
+  .nav-indicator { display: none; }
   .chapter-nav a:hover { background: transparent; }
   .chapter-nav a.active,
   .on-dark .chapter-nav a.active,

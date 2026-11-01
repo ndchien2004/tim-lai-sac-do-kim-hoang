@@ -97,8 +97,25 @@ if (lenis) lenis.on("scroll", refreshTone);
 else window.addEventListener("scroll", refreshTone, { passive: true });
 refreshTone();
 
-// Mục lục đang đọc
+// Mục lục đang đọc + con dấu trượt sau mục đang active
+const nav = $("#chapterNav");
 const navLinks = $$(".chapter-nav a");
+const indicator = document.createElement("span");
+indicator.className = "nav-indicator";
+indicator.setAttribute("aria-hidden", "true");
+nav.prepend(indicator);
+
+function moveIndicator() {
+  const link = navLinks.find((a) => a.classList.contains("active"));
+  if (!link) { indicator.classList.remove("is-visible"); return; }
+  const first = !indicator.classList.contains("is-visible");
+  if (first) indicator.style.transition = "opacity 0.35s"; // lần đầu: hiện tại chỗ, không trượt từ mép trái
+  indicator.style.setProperty("--x", link.offsetLeft + "px");
+  indicator.style.setProperty("--w", link.offsetWidth + "px");
+  indicator.classList.add("is-visible");
+  if (first) requestAnimationFrame(() => requestAnimationFrame(() => indicator.style.removeProperty("transition")));
+}
+
 $$("[data-section^='chapter']").forEach((sec) => {
   ScrollTrigger.create({
     trigger: sec,
@@ -115,9 +132,12 @@ $$("[data-section^='chapter']").forEach((sec) => {
         link.classList.remove("active");
         link.removeAttribute("aria-current");
       }
+      moveIndicator();
     },
   });
 });
+window.addEventListener("resize", moveIndicator);
+document.fonts && document.fonts.ready.then(moveIndicator);
 
 /* --------------------------------------------------------------------------
    Menu di động
