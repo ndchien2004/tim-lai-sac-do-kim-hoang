@@ -274,7 +274,7 @@ if (animate) {
   /* ----- Hero: parallax khi cuộn ----- */
   const heroST = { trigger: ".hero", start: "top top", end: "bottom top", scrub: true };
   gsap.to(".hero-sun", { yPercent: 28, scale: 1.12, ease: "none", scrollTrigger: heroST });
-  gsap.to(".hero-photo", { yPercent: 12, ease: "none", scrollTrigger: heroST });
+  gsap.to(".hero-photo", { y: () => -window.innerHeight * 0.12, ease: "none", scrollTrigger: heroST });
   gsap.to(".hero-photo-frame", { rotate: -2, ease: "none", scrollTrigger: heroST });
   gsap.to(".hero-content", { yPercent: -18, autoAlpha: 0.15, ease: "none", scrollTrigger: { ...heroST, start: "20% top" } });
   gsap.to(".hero-ink--one", { yPercent: -30, ease: "none", scrollTrigger: heroST });

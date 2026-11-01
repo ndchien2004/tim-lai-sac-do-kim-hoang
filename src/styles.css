@@ -511,11 +511,13 @@ button { font: inherit; color: inherit; }
 .hero-photo {
   position: absolute;
   right: max(var(--gutter), calc((100vw - var(--max)) / 2 + 2rem));
-  top: 50%;
+  top: calc(50% + var(--header-h) / 2 - 1.5rem);
   z-index: 1;
-  width: min(30vw, 400px);
+  /* vừa theo cả bề ngang lẫn chiều cao màn hình: ảnh 2:3 + khung + chú thích */
+  width: min(30vw, 400px, calc((100svh - var(--header-h) - 12rem) * 0.6));
+  min-width: 180px;
   margin: 0;
-  transform: translateY(-46%);
+  transform: translateY(-50%);
 }
 .hero-photo-frame {
   position: relative;
