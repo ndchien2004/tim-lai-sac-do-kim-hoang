@@ -173,10 +173,8 @@ button { font: inherit; color: inherit; }
   height: 2.5rem;
   background: var(--red);
   color: var(--paper);
-  font: 700 0.95rem/1 var(--f-display);
-  letter-spacing: 0.04em;
-  border-radius: 3px;
-  box-shadow: inset 0 0 0 2px var(--red), inset 0 0 0 3.5px rgba(244, 234, 217, 0.85);
+  border-radius: 5px;
+  box-shadow: inset 0 0 0 2.5px var(--red), inset 0 0 0 3.5px rgba(244, 234, 217, 0.85);
   transform: rotate(-4deg);
   transition: transform 0.5s var(--ease-out);
 }
@@ -583,9 +581,7 @@ button { font: inherit; color: inherit; }
   height: 58px;
   background: var(--red);
   color: var(--paper);
-  font: 800 1.15rem/1 var(--f-display);
-  letter-spacing: 0.04em;
-  border-radius: 3px;
+  border-radius: 6px;
   box-shadow: inset 0 0 0 3px var(--red), inset 0 0 0 4.5px rgba(244, 234, 217, 0.8), 0 8px 16px rgba(28, 19, 16, 0.35);
   transform: rotate(-9deg);
 }
@@ -705,7 +701,7 @@ button { font: inherit; color: inherit; }
   .hero { align-items: end; padding-bottom: 8.5rem; }
   .hero-sun { left: 72%; top: 34%; width: 110vw; }
   .hero-photo { width: min(42vw, 210px); right: var(--gutter); top: calc(var(--header-h) + 1.25rem); transform: none; }
-  .hero-photo-seal { width: 40px; height: 40px; right: -10px; font-size: 0.8rem; }
+  .hero-photo-seal { width: 42px; height: 42px; right: -10px; }
   .hero-photo figcaption { display: none; }
   .hero h1 strong { font-size: clamp(4.2rem, 20vw, 9rem); margin-top: 0.26em; }
   .hero-content .eyebrow { color: var(--paper); }
@@ -820,16 +816,15 @@ button { font: inherit; color: inherit; }
   left: 9%;
   bottom: 26%;
   display: grid;
-  gap: 2px;
-  padding: 0.35rem;
+  place-items: center;
+  width: clamp(2.6rem, 4.6vw, 3.6rem);
+  aspect-ratio: 1;
   background: var(--red);
   color: var(--paper);
-  font: 700 clamp(0.8rem, 1.4vw, 1.1rem)/1 var(--f-display);
-  border-radius: 2px;
-  box-shadow: 0 0 0 3px var(--paper-2), 0 8px 24px rgba(28, 19, 16, 0.25);
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 2.5px var(--red), inset 0 0 0 3.5px rgba(244, 234, 217, 0.75), 0 0 0 3px var(--paper-2), 0 8px 24px rgba(28, 19, 16, 0.25);
   transform: rotate(-3deg);
 }
-.gate-mark span { display: grid; place-items: center; width: 1.6em; height: 1.6em; border: 1px solid rgba(244, 234, 217, 0.6); }
 .village-visual figcaption {
   position: absolute;
   right: clamp(1rem, 3vw, 2.5rem);
@@ -1778,7 +1773,7 @@ button { font: inherit; color: inherit; }
   border-radius: 6px;
   background: var(--paper);
   color: var(--red);
-  font: 800 clamp(2.4rem, 5vw, 4rem)/1 var(--f-display);
+  --mark-carve: var(--paper);
   box-shadow: inset 0 0 0 5px var(--paper), inset 0 0 0 7px currentColor;
   transform: rotate(-6deg);
   transition: color 0.9s var(--ease-out);
@@ -1848,7 +1843,7 @@ button { font: inherit; color: inherit; }
   .process-sticky p { display: none; }
   .process-disc { width: 56px; margin: 0; flex-shrink: 0; box-shadow: 0 0 0 1px rgba(244, 234, 217, 0.4); }
   .process-disc::before { inset: 12%; }
-  .process-rooster-mini { font-size: 0.7rem; border-radius: 2px; box-shadow: none; }
+  .process-rooster-mini { border-radius: 2px; box-shadow: none; }
   .process-step { opacity: 1; }
 }
 
@@ -2297,16 +2292,16 @@ button { font: inherit; color: inherit; }
 }
 .footer-stamp {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3px;
-  padding: 6px;
+  place-items: center;
+  width: clamp(4.5rem, 8vw, 6rem);
+  aspect-ratio: 1;
   background: var(--red);
-  border-radius: 3px;
-  font: 800 clamp(1.4rem, 2.4vw, 2rem)/1 var(--f-display);
+  color: var(--paper);
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 4px var(--red), inset 0 0 0 5.5px rgba(244, 234, 217, 0.7);
   transform: rotate(-6deg);
   justify-self: start;
 }
-.footer-stamp span { display: grid; place-items: center; width: 1.7em; height: 1.7em; border: 1px solid rgba(244, 234, 217, 0.55); }
 .footer-copy .eyebrow { color: var(--gold); }
 .footer-copy h2 {
   margin: 1.25rem 0 2rem;
@@ -2846,3 +2841,12 @@ mark.verify { background: none; color: inherit; }
 @media (max-width: 960px) {
   .story-grid > .side-photo:nth-child(n) { position: static; justify-self: start; max-width: 24rem; }
 }
+
+/* ==========================================================================
+   Logo: con dấu gà trống gáy sáng
+   ========================================================================== */
+.svg-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+.kh-mark { display: block; width: 72%; height: auto; aspect-ratio: 46 / 49; overflow: visible; }
+.brand-stamp .kh-mark { width: 76%; }
+.process-rooster-mini .kh-mark { width: 64%; }
+.process-disc[data-step="3"] .process-rooster-mini { --mark-carve: var(--paper); }

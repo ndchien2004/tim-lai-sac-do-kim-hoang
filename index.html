@@ -11,6 +11,7 @@
   <meta property="og:locale" content="vi_VN">
   <title>Tìm lại sắc đỏ Kim Hoàng — Mega Story</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <script>
     (function () {
       var d = document.documentElement;
@@ -25,12 +26,34 @@
   <script type="module" src="/src/main.js"></script>
 </head>
 <body>
+  <svg class="svg-sprite" aria-hidden="true" focusable="false">
+    <symbol id="kh-mark" viewBox="11 8 46 49">
+      <circle cx="42" cy="20" r="9.5" fill="var(--mark-sun, #d6a13a)"/>
+      <g fill="currentColor">
+        <path d="M35.5 34C35 24 39 15.5 47 12.5 43.5 18 41.5 25 41 34.5Z"/>
+        <path d="M38.5 36C41 27.5 46.5 21.5 54 20.5 48.5 25 45.5 30 44 37Z"/>
+        <path d="M40.5 39.5C44 34.5 49.5 31.5 55 32.5 50 34.5 47 37.5 45 41.5Z"/>
+        <path d="M40.5 43C44 41.5 48.5 42 51.5 44.5 47.5 44.5 44.5 45.2 41.8 46.5Z"/>
+        <path d="M14.5 21.3 19.2 18.6C20.3 16.4 22.4 15.2 24.8 15.4 27.6 15.7 28.8 18.4 28.6 21.6 28.4 25.2 30.2 29 34.8 31.6 38.2 33.4 40.8 35.8 41.4 39.6 42 44.2 38.4 47.8 32.6 48.4 26.4 49 20.4 46.6 18 41.2 16.2 37.2 16.8 32 18.4 28.2 19.2 26.2 19.6 24.4 19.4 22.8Z"/>
+        <path d="M19.4 16.4C18.4 13.6 20 11.4 21.6 12.6 21.6 10 24.6 9.4 25.2 11.6 26.2 9.8 29.2 10.6 28.2 13.6 27.4 15 24.8 15 23 15.4 21.6 15.6 20.4 16 19.4 16.4Z"/>
+        <path d="M25.6 48 24.6 52.6 21.6 54 22.2 55 26.8 53.6 28.4 48.4Z"/>
+        <path d="M31 48.6 31.6 53.2 29 54.6 29.6 55.4 33.8 53.8 33.4 48.4Z"/>
+      </g>
+      <g fill="var(--mark-carve, #a9231b)">
+        <path d="M19.6 22.4C18.8 25.2 20 27.2 21.4 26.2 22.2 25.2 21.6 23.4 19.6 22.4Z"/>
+        <circle cx="23.6" cy="18.8" r="1.25"/>
+      </g>
+      <g fill="none" stroke="var(--mark-carve, #a9231b)" stroke-width="1.15" stroke-linecap="round">
+        <path d="M24.2 35.2C27.6 41 33.6 43.4 38.6 41.8M23.4 39.6C26.4 43.8 31.4 45.6 35.6 45M22.2 24.6C23.4 27.4 25.4 29.4 28.2 30.4M21.4 28.8C23 31.6 25.4 33.2 28.4 33.8"/>
+      </g>
+    </symbol>
+  </svg>
   <a class="skip-link" href="#opening">Bỏ qua phần mở đầu</a>
   <div class="paper-noise" aria-hidden="true"></div>
 
   <header class="site-header" id="siteHeader">
     <a class="brand" href="#top" aria-label="Về đầu trang">
-      <span class="brand-stamp" aria-hidden="true">KH</span>
+      <span class="brand-stamp" aria-hidden="true"><svg class="kh-mark"><use href="#kh-mark"/></svg></span>
       <span class="brand-copy"><strong>Tranh đỏ</strong><small>Một Mega Story</small></span>
     </a>
     <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="chapterNav">
@@ -56,7 +79,7 @@
       <figure class="hero-photo">
         <div class="hero-photo-frame">
           <img src="/images/hero-nghe-nhan-hang-trong-1915.jpg" width="640" height="960" alt="Nghệ nhân vẽ tranh dân gian ở Hà Nội, phía sau treo tranh hổ và tranh tố nữ" fetchpriority="high" decoding="async">
-          <span class="hero-photo-seal" aria-hidden="true">KH</span>
+          <span class="hero-photo-seal" aria-hidden="true"><svg class="kh-mark"><use href="#kh-mark"/></svg></span>
         </div>
         <figcaption>Nghệ nhân tranh dân gian ở Hà Nội, thập niên 1910. Ảnh màu autochrome: Léon Busy.</figcaption>
       </figure>
@@ -97,7 +120,7 @@
         <div class="village-sky"><span class="sun-disc"></span></div>
         <div class="village-line village-line--far"></div>
         <div class="village-line village-line--near"></div>
-        <div class="gate-mark"><span>K</span><span>H</span></div>
+        <div class="gate-mark" aria-hidden="true"><svg class="kh-mark"><use href="#kh-mark"/></svg></div>
         <figcaption><b>Kim Hoàng hôm nay</b><span>Nhà cao tầng đã thay những khoảng sân từng phơi tranh mỗi độ Tết về.</span></figcaption>
       </figure>
 
@@ -408,7 +431,7 @@
         <div class="process-sticky reveal">
           <span>Ba cái khó</span>
           <div class="process-disc" id="processDisc">
-            <div class="process-rooster-mini">KH</div>
+            <div class="process-rooster-mini" aria-hidden="true"><svg class="kh-mark"><use href="#kh-mark"/></svg></div>
           </div>
           <p>Giấy, màu và bàn tay: mỗi thứ phải lần lại bằng thử nghiệm.</p>
         </div>
@@ -591,7 +614,7 @@
   </main>
 
   <footer class="site-footer">
-    <div class="footer-stamp" aria-hidden="true"><span>K</span><span>H</span></div>
+    <div class="footer-stamp" aria-hidden="true"><svg class="kh-mark"><use href="#kh-mark"/></svg></div>
     <div class="footer-copy">
       <p class="eyebrow"><span></span>Mega Story · Tìm lại sắc đỏ Kim Hoàng</p>
       <h2>Một dòng tranh sống lại<br>từ những điều còn nhớ.</h2>
