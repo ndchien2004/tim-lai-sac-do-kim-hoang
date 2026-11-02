@@ -938,88 +938,11 @@ button { font: inherit; color: inherit; }
   pointer-events: none;
   z-index: 3;
 }
-.portrait-silhouette { position: absolute; inset: 0; z-index: 1; }
-.portrait-silhouette .head {
-  position: absolute;
-  left: 24%;
-  top: 16%;
-  width: 18%;
-  aspect-ratio: 0.82;
-  border-radius: 50% 50% 46% 46%;
-  background: var(--ink);
-}
-.portrait-silhouette .head::after {
-  /* búi tóc */
-  content: "";
-  position: absolute;
-  right: -18%;
-  top: 22%;
-  width: 40%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: var(--ink);
-}
-.portrait-silhouette .body {
-  position: absolute;
-  left: 11%;
-  top: 46%;
-  width: 44%;
-  height: 70%;
-  border-radius: 46% 46% 0 0 / 34% 34% 0 0;
-  background: var(--ink);
-}
-.portrait-silhouette .hand {
-  position: absolute;
-  left: 44%;
-  top: 64%;
-  width: 18%;
-  height: 7%;
-  border-radius: 999px;
-  background: var(--ink);
-  transform: rotate(-12deg);
-  transform-origin: left center;
-}
-.block-stack {
-  position: absolute;
-  right: 12%;
-  bottom: 12%;
-  width: 34%;
-  display: grid;
-  gap: 6px;
-  z-index: 2;
-}
-.block-stack i {
-  display: block;
-  height: clamp(16px, 2.6vw, 30px);
-  border-radius: 2px;
-  background:
-    repeating-linear-gradient(92deg, rgba(0, 0, 0, 0.12) 0 2px, transparent 2px 9px),
-    linear-gradient(180deg, #8a5a36, #6b4127);
-  box-shadow: 0 6px 12px rgba(28, 19, 16, 0.35);
-}
-.block-stack i:nth-child(1) { width: 78%; margin-left: 14%; }
-.block-stack i:nth-child(2) { width: 90%; margin-left: 4%; }
-.block-stack i:nth-child(3) { width: 84%; margin-left: 10%; }
-.block-stack i:nth-child(4) { width: 100%; }
-.portrait-word {
-  position: absolute;
-  right: 6%;
-  top: 8%;
-  z-index: 2;
-  font: 800 clamp(2.4rem, 5.6vw, 5rem)/0.95 var(--f-display);
-  letter-spacing: 0.02em;
-  color: var(--gold);
-  writing-mode: vertical-rl;
-  text-orientation: upright;
-  opacity: 0.95;
-}
 .portrait-caption { padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); }
 .portrait-caption p { font: italic 400 clamp(1.05rem, 1.6vw, 1.3rem)/1.5 var(--f-text); color: var(--ink-2); padding-bottom: 1rem; }
 
 @media (max-width: 820px) {
   .portrait-stage { grid-template-columns: 1fr; }
-  .portrait-word { writing-mode: horizontal-tb; top: auto; bottom: 1.6rem; left: 1.6rem; right: auto; font-size: clamp(2.6rem, 12vw, 4rem); }
-  .block-stack { bottom: 22%; }
 }
 
 .margin-quote { text-align: right; }
@@ -1566,47 +1489,21 @@ button { font: inherit; color: inherit; }
 }
 .woodblock {
   position: relative;
-  aspect-ratio: 4 / 5;
-  border-radius: 6px;
-  background: linear-gradient(140deg, #8d5d3a, #6f4428 45%, #573320);
-  box-shadow:
-    inset 0 0 0 10px rgba(0, 0, 0, 0.08),
-    inset 0 0 60px rgba(28, 19, 16, 0.5),
-    0 40px 70px -30px rgba(28, 19, 16, 0.7);
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius);
+  background: #2a1d16;
+  box-shadow: 0 40px 70px -30px rgba(28, 19, 16, 0.7);
   overflow: hidden;
-  transform-style: preserve-3d;
 }
-.wood-grain {
+.woodblock img {
   position: absolute;
   inset: 0;
-  background:
-    repeating-radial-gradient(ellipse 140% 18% at 30% 40%, transparent 0 9px, rgba(28, 19, 16, 0.12) 10px 11px),
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.03) 0 3px, transparent 3px 11px);
-  mix-blend-mode: multiply;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: 50% 60%;
 }
-.woodblock::after {
-  /* vết xước */
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(101deg, transparent 31%, rgba(255, 230, 200, 0.14) 31.1% 31.3%, transparent 31.5%),
-    linear-gradient(97deg, transparent 63%, rgba(255, 230, 200, 0.09) 63.1% 63.25%, transparent 63.4%),
-    linear-gradient(8deg, transparent 22%, rgba(0, 0, 0, 0.2) 22.1% 22.4%, transparent 22.6%);
-}
-.woodblock svg {
-  position: absolute;
-  inset: 8%;
-  width: 84%;
-  height: 84%;
-  fill: none;
-  stroke: #2d1a10;
-  stroke-width: 11;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  filter: drop-shadow(1.5px 2px 0 rgba(255, 220, 180, 0.22));
-}
-.woodblock svg circle { fill: #2d1a10; stroke: none; }
 .woodblock-tag {
   position: absolute;
   left: 1.25rem;
@@ -1643,7 +1540,7 @@ button { font: inherit; color: inherit; }
 
 @media (max-width: 820px) {
   .woodblock-stage { grid-template-columns: 1fr; }
-  .woodblock { max-width: 30rem; width: 100%; justify-self: center; }
+  .woodblock { width: 100%; }
   .giant-zero { font-size: clamp(6rem, 30vw, 9rem); margin-bottom: 1rem; }
 }
 
@@ -2160,35 +2057,6 @@ button { font: inherit; color: inherit; }
   border-radius: 2px;
   pointer-events: none;
 }
-.desks {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(0.75rem, 2vw, 1.5rem);
-  perspective: 800px;
-}
-.desks i {
-  position: relative;
-  display: grid;
-  place-items: center;
-  aspect-ratio: 4 / 3;
-  border-radius: 3px;
-  background: linear-gradient(180deg, #a9774c, #8a5b37);
-  box-shadow: 0 10px 0 -4px #5c3a22, 0 18px 24px -10px rgba(0, 0, 0, 0.6);
-  transform: rotateX(28deg);
-}
-.desks i span {
-  width: 52%;
-  aspect-ratio: 3 / 4;
-  background: linear-gradient(160deg, var(--red-2), var(--red));
-  border-radius: 1px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.35);
-  transform: rotate(var(--r, -4deg));
-}
-.desks i:nth-child(2) span { --r: 3deg; background: linear-gradient(160deg, #d54b26, #b8361a); }
-.desks i:nth-child(3) span { --r: -2deg; background: linear-gradient(160deg, #c74751, #a8333d); }
-.desks i:nth-child(4) span { --r: 5deg; }
-.desks i:nth-child(5) span { --r: -6deg; background: linear-gradient(160deg, #e2b14d, var(--gold)); }
-.desks i:nth-child(6) span { --r: 2deg; background: linear-gradient(160deg, #d54b26, #b8361a); }
 .teacher-line {
   position: absolute;
   left: clamp(2rem, 5vw, 4.5rem);
@@ -2238,9 +2106,9 @@ button { font: inherit; color: inherit; }
   border-radius: 999px;
   font: italic 500 clamp(1.15rem, 2.2vw, 1.6rem)/1 var(--f-display);
   color: var(--ink-3);
-  transition: transform 0.5s var(--ease-out), border-color 0.4s, color 0.4s;
+  transition: translate 0.5s var(--ease-out), border-color 0.4s, color 0.4s;
 }
-.four-traditions i:hover { border-color: var(--ink-3); color: var(--ink); transform: translateY(-3px); }
+.four-traditions i:hover { border-color: var(--ink-3); color: var(--ink); translate: 0 -3px; }
 .four-traditions i.active {
   background: var(--red);
   border-color: var(--red);
@@ -2831,4 +2699,150 @@ mark.verify { background: none; color: inherit; }
 @media print {
   .site-header, .paper-noise, .scroll-cue { display: none; }
   .hero { min-height: auto; }
+}
+
+
+/* ==========================================================================
+   Ảnh hiện trường (phòng tranh của cô Bình)
+   ========================================================================== */
+.portrait-paper--photo { margin: 0; background: var(--ink); }
+.portrait-paper--photo img {
+  position: absolute;
+  left: 0;
+  top: -8%;
+  width: 100%;
+  height: 116%;
+  object-fit: cover;
+  object-position: 38% 50%;
+}
+.portrait-paper--photo::before { border-color: rgba(255, 255, 255, 0.35); }
+
+.field-photo {
+  margin: clamp(3.5rem, 7vw, 6rem) auto 0;
+  max-width: calc(var(--max) + 6rem) !important;
+}
+.field-photo-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.field-photo-frame img {
+  position: absolute;
+  left: 0;
+  top: -8%;
+  width: 100%;
+  height: 116%;
+  object-fit: cover;
+}
+.field-photo figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.75rem;
+  align-items: baseline;
+  max-width: 46rem;
+  margin-top: 0.9rem;
+  padding-left: 0.9rem;
+  border-left: 3px solid var(--red);
+  font: 400 0.88rem/1.5 var(--f-ui);
+  color: var(--ink-3);
+}
+.field-photo figcaption b { font: 600 1rem/1.3 var(--f-display); color: var(--ink); }
+@media (max-width: 640px) {
+  .field-photo { margin-left: calc(var(--gutter) * -1) !important; margin-right: calc(var(--gutter) * -1) !important; }
+  .field-photo-frame { aspect-ratio: 4 / 3; border-radius: 0; }
+  .field-photo figcaption { margin-left: var(--gutter); margin-right: var(--gutter); }
+}
+
+/* Ô chữ Lưu bằng ảnh thật */
+.glyph--photo {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  box-shadow: 0 0 0 4px #fff, 0 0 0 5px rgba(28, 19, 16, 0.18), 0 16px 26px -14px rgba(74, 15, 11, 0.7);
+}
+.glyph--photo img { width: 100%; height: 100%; object-fit: cover; }
+.glyph--photo b {
+  position: absolute;
+  left: 50%;
+  bottom: 0.35rem;
+  transform: translateX(-50%);
+  padding: 0.2rem 0.45rem;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ink);
+  font: 600 0.68rem/1 var(--f-ui);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+.glyph-note {
+  display: block;
+  margin-top: 0.85rem;
+  font: italic 400 0.82rem/1.45 var(--f-text);
+  color: var(--ink-3);
+}
+
+/* Bộ ảnh ở khối "Giữ / Đổi" */
+.identity-photos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  max-width: 44rem;
+  margin: clamp(2rem, 4vw, 3rem) auto 0;
+}
+.identity-photos figure {
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 2px;
+  box-shadow: 0 0 0 6px var(--paper), 0 30px 50px -24px rgba(28, 19, 16, 0.8);
+}
+.identity-photos figure:first-child { transform: rotate(-1.5deg); }
+.identity-photos figure:nth-child(2) { transform: rotate(1.5deg) translateY(1.5rem); }
+.identity-photos img { width: 100%; height: 100%; object-fit: cover; }
+.identity-photos p {
+  grid-column: 1 / -1;
+  margin-top: 2.25rem;
+  text-align: center;
+  font: italic 400 0.9rem/1.5 var(--f-text);
+  color: rgba(244, 234, 217, 0.78);
+}
+
+/* Ảnh ở khối "Trao lại một ký ức" */
+.classroom-photo {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 2px;
+  box-shadow: 0 30px 50px -28px rgba(0, 0, 0, 0.8);
+}
+.classroom-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+.classroom-copy small {
+  display: block;
+  margin-top: 1.25rem;
+  font: italic 400 0.85rem/1.5 var(--f-text);
+  color: rgba(244, 234, 217, 0.7);
+}
+
+/* Ảnh ở cột lề Phần 05 */
+.side-photo { margin: 0; position: sticky; top: calc(var(--header-h) + 2rem); }
+.side-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 2px;
+  box-shadow: 0 24px 40px -26px rgba(28, 19, 16, 0.6);
+}
+.side-photo figcaption {
+  margin-top: 0.6rem;
+  font: italic 400 0.82rem/1.45 var(--f-text);
+  color: var(--ink-3);
+}
+@media (max-width: 960px) {
+  .story-grid > .side-photo:nth-child(n) { position: static; justify-self: start; max-width: 24rem; }
 }

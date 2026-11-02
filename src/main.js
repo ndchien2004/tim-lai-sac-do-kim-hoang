@@ -370,9 +370,8 @@ if (animate) {
 
   /* ----- Phần 01 ----- */
   const portrait = $(".portrait-paper");
-  gsap.from($$(".block-stack i", portrait), { x: 60, autoAlpha: 0, stagger: 0.1, duration: 1.1, ease: "expo.out", scrollTrigger: { trigger: portrait, start: "top 70%", once: true } });
-  gsap.from(".portrait-word", { yPercent: 30, autoAlpha: 0, duration: 1.6, ease: "expo.out", scrollTrigger: { trigger: portrait, start: "top 70%", once: true } });
-  gsap.fromTo(".portrait-silhouette", { yPercent: 8 }, { yPercent: -4, ease: "none", scrollTrigger: { trigger: portrait, start: "top bottom", end: "bottom top", scrub: true } });
+  gsap.fromTo($("img", portrait), { yPercent: -6 }, { yPercent: 6, ease: "none", scrollTrigger: { trigger: portrait, start: "top bottom", end: "bottom top", scrub: true } });
+  gsap.fromTo(portrait, { clipPath: "inset(10% 6% 10% 6% round 4px)" }, { clipPath: "inset(0% 0% 0% 0% round 4px)", ease: "none", scrollTrigger: { trigger: portrait, start: "top 95%", end: "top 40%", scrub: true } });
 
   const mapPaths = $$(".map-card .map-river, .map-card .map-dike");
   prepStroke(mapPaths);
@@ -395,10 +394,8 @@ if (animate) {
 
   /* ----- Phần 03 ----- */
   const wood = $(".woodblock");
-  const woodPaths = $$("svg path", wood);
-  prepStroke(woodPaths);
-  gsap.to(woodPaths, { strokeDashoffset: 0, ease: "none", stagger: 0.1, scrollTrigger: { trigger: wood, start: "top 80%", end: "center 40%", scrub: 0.8 } });
-  gsap.fromTo(wood, { rotateY: -14, rotateX: 6, transformPerspective: 1200 }, { rotateY: 6, rotateX: -2, ease: "none", scrollTrigger: { trigger: wood, start: "top bottom", end: "bottom top", scrub: true } });
+  gsap.fromTo(wood, { rotate: -2.5, y: 40 }, { rotate: 1, y: -20, ease: "none", scrollTrigger: { trigger: wood, start: "top bottom", end: "bottom top", scrub: true } });
+  gsap.fromTo($("img", wood), { scale: 1.14 }, { scale: 1, ease: "none", scrollTrigger: { trigger: wood, start: "top bottom", end: "center 40%", scrub: true } });
   gsap.fromTo(".giant-zero", { scale: 0.6, autoAlpha: 0, rotate: -12 }, { scale: 1, autoAlpha: 1, rotate: 0, ease: "none", scrollTrigger: { trigger: ".woodblock-stage", start: "top 80%", end: "center 55%", scrub: true } });
 
   /* ----- Phần 04 ----- */
@@ -423,9 +420,15 @@ if (animate) {
   gsap.from(".hand-steps li", { y: 24, autoAlpha: 0, stagger: 0.12, duration: 0.9, ease: "expo.out", scrollTrigger: { trigger: ".hand-steps", start: "top 85%", once: true } });
 
   /* ----- Phần 05 ----- */
-  gsap.from(".desks i", { y: 50, rotateX: 70, autoAlpha: 0, stagger: { each: 0.08, grid: [2, 3], from: "start" }, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: ".classroom-visual", start: "top 75%", once: true } });
-  gsap.from(".desks i span", { scale: 0, rotate: 30, stagger: 0.08, duration: 0.9, ease: "back.out(2)", delay: 0.5, scrollTrigger: { trigger: ".classroom-visual", start: "top 75%", once: true } });
-  gsap.from(".four-traditions i", { y: 30, autoAlpha: 0, stagger: 0.08, duration: 1, ease: "expo.out", scrollTrigger: { trigger: ".four-traditions", start: "top 88%", once: true } });
+  gsap.fromTo(".classroom-photo img", { clipPath: "inset(0 100% 0 0)", scale: 1.1 }, { clipPath: "inset(0 0% 0 0)", scale: 1, duration: 1.6, ease: "expo.out", scrollTrigger: { trigger: ".classroom-visual", start: "top 75%", once: true } });
+
+  /* ----- Ảnh hiện trường ----- */
+  $$(".field-photo-frame").forEach((frame) => {
+    gsap.fromTo(frame, { clipPath: "inset(8% 5% 8% 5% round 4px)" }, { clipPath: "inset(0% 0% 0% 0% round 4px)", ease: "none", scrollTrigger: { trigger: frame, start: "top 95%", end: "top 35%", scrub: true } });
+    gsap.fromTo($("img", frame), { yPercent: -7 }, { yPercent: 7, ease: "none", scrollTrigger: { trigger: frame, start: "top bottom", end: "bottom top", scrub: true } });
+  });
+  gsap.from(".identity-photos figure", { y: 60, rotate: (i) => (i ? 4 : -4), autoAlpha: 0, stagger: 0.15, duration: 1.3, ease: "expo.out", scrollTrigger: { trigger: ".identity-photos", start: "top 85%", once: true } });
+  gsap.from(".four-traditions i", { y: 30, autoAlpha: 0, stagger: 0.08, duration: 1, ease: "expo.out", clearProps: "all", scrollTrigger: { trigger: ".four-traditions", start: "top 88%", once: true } });
   gsap.from(".dream-grid li", { x: 40, autoAlpha: 0, stagger: 0.12, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: ".dream-grid", start: "top 80%", once: true } });
 
   // Tờ tranh được nhấc khỏi ván in
