@@ -161,6 +161,62 @@ window.matchMedia("(min-width: 821px)").addEventListener("change", (e) => e.matc
 /* --------------------------------------------------------------------------
    So sánh cũ / mới
    -------------------------------------------------------------------------- */
+/* ==========================================================================
+   Video phỏng vấn: điền link vào data-video của từng khối .video-slot
+   Hỗ trợ YouTube, Vimeo, Google Drive, Facebook, hoặc file .mp4/.webm
+   ========================================================================== */
+function videoEmbed(raw) {
+  const v = (raw || "").trim();
+  if (!v) return null;
+  let m;
+  if ((m = v.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/))([\w-]{11})/)) || (m = v.match(/^([\w-]{11})$/)))
+    return { type: "iframe", src: `https://www.youtube-nocookie.com/embed/${m[1]}?autoplay=1&rel=0&modestbranding=1&playsinline=1` };
+  if ((m = v.match(/vimeo\.com\/(?:video\/)?(\d+)/)))
+    return { type: "iframe", src: `https://player.vimeo.com/video/${m[1]}?autoplay=1&title=0&byline=0` };
+  if ((m = v.match(/drive\.google\.com\/(?:file\/d\/|open\?id=)([\w-]+)/)))
+    return { type: "iframe", src: `https://drive.google.com/file/d/${m[1]}/preview` };
+  if (/facebook\.com|fb\.watch/.test(v))
+    return { type: "iframe", src: `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(v)}&show_text=false&autoplay=true` };
+  if (/\.(mp4|webm|mov|m4v)(\?|#|$)/i.test(v)) return { type: "video", src: v };
+  if (/^https?:\/\//.test(v)) return { type: "iframe", src: v };
+  return null;
+}
+
+$$(".video-slot").forEach((slot) => {
+  const embed = videoEmbed(slot.dataset.video);
+  const frame = $(".video-frame", slot);
+  const btn = $(".video-play", slot);
+  if (slot.dataset.ratio) frame.style.setProperty("--video-ratio", slot.dataset.ratio);
+  if (!embed) {
+    slot.classList.add("is-pending");
+    btn.setAttribute("aria-disabled", "true");
+    btn.setAttribute("aria-label", btn.getAttribute("aria-label") + " (video sẽ sớm được cập nhật)");
+    return;
+  }
+  btn.addEventListener("click", () => {
+    if (slot.classList.contains("is-playing")) return;
+    let el;
+    if (embed.type === "video") {
+      el = document.createElement("video");
+      el.src = embed.src;
+      el.controls = true;
+      el.playsInline = true;
+      el.autoplay = true;
+      el.addEventListener("play", () => $$(".video-frame video").forEach((o) => o !== el && o.pause()));
+    } else {
+      el = document.createElement("iframe");
+      el.src = embed.src;
+      el.title = $("h3", slot)?.textContent || "Video";
+      el.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+      el.allowFullscreen = true;
+      el.loading = "lazy";
+    }
+    frame.appendChild(el);
+    slot.classList.add("is-playing");
+    if (el.focus) el.focus();
+  });
+});
+
 const compare = $("#compare");
 const range = $("#compareRange");
 function setCompare(v) {
@@ -361,28 +417,19 @@ if (animate) {
   countUp($(".opening-number strong"));
   $$(".numbers-band strong").forEach(countUp);
 
-  const village = $(".village-visual");
-  const vST = { trigger: village, start: "top bottom", end: "bottom top", scrub: true };
-  gsap.fromTo(".sun-disc", { yPercent: 60 }, { yPercent: -40, ease: "none", scrollTrigger: vST });
-  gsap.fromTo(".village-line--far", { xPercent: 0, yPercent: 8 }, { xPercent: -3, yPercent: -4, ease: "none", scrollTrigger: vST });
-  gsap.fromTo(".village-line--near", { xPercent: -3 }, { xPercent: 0, ease: "none", scrollTrigger: vST });
-  gsap.fromTo(village, { clipPath: "inset(12% 8% 12% 8% round 4px)" }, { clipPath: "inset(0% 0% 0% 0% round 4px)", ease: "none", scrollTrigger: { trigger: village, start: "top 95%", end: "top 30%", scrub: true } });
 
   /* ----- Phần 01 ----- */
   const portrait = $(".portrait-paper");
   gsap.fromTo($("img", portrait), { yPercent: -6 }, { yPercent: 6, ease: "none", scrollTrigger: { trigger: portrait, start: "top bottom", end: "bottom top", scrub: true } });
   gsap.fromTo(portrait, { clipPath: "inset(10% 6% 10% 6% round 4px)" }, { clipPath: "inset(0% 0% 0% 0% round 4px)", ease: "none", scrollTrigger: { trigger: portrait, start: "top 95%", end: "top 40%", scrub: true } });
 
-  const mapPaths = $$(".map-card .map-river, .map-card .map-dike");
-  prepStroke(mapPaths);
-  const mapTl = gsap.timeline({ scrollTrigger: { trigger: ".map-card", start: "top 75%", once: true } });
-  mapTl
-    .to(mapPaths, { strokeDashoffset: 0, duration: 1.8, ease: "power2.inOut", stagger: 0.2 }, 0)
-    .from(".map-flood", { scale: 0.6, autoAlpha: 0, transformOrigin: "40% 60%", duration: 1.4, ease: "expo.out" }, 0.8)
-    .from(".map-break", { scale: 0, transformOrigin: "50% 50%", duration: 0.6, ease: "back.out(3)" }, 1.4)
-    .from(".map-place, .map-t", { autoAlpha: 0, y: 8, stagger: 0.06, duration: 0.7, ease: "power2.out" }, 1.1);
-  // nét đê giữ kiểu gạch đứt sau khi vẽ xong
-  mapTl.call(() => $$(".map-card .map-dike").forEach((d) => { d.style.strokeDasharray = ""; d.style.strokeDashoffset = ""; }));
+  gsap.timeline({ scrollTrigger: { trigger: ".map-card", start: "top 75%", once: true } })
+    .from(".map-base", { scale: 1.08, transformOrigin: "40% 60%", duration: 1.6, ease: "expo.out" }, 0)
+    .from(".map-water", { autoAlpha: 0, duration: 0.8 }, 0.3)
+    .from(".map-break", { scale: 0, transformOrigin: "50% 50%", duration: 0.7, ease: "back.out(3)" }, 0.5)
+    .from(".map-flood", { scale: 0.4, autoAlpha: 0, transformOrigin: "50% 15%", duration: 1.6, ease: "expo.out" }, 0.8)
+    .from(".map-flow path", { autoAlpha: 0, x: -10, y: -14, stagger: 0.15, duration: 0.9, ease: "power2.out" }, 0.9)
+    .from(".map-label, .map-flood-label, .map-town, .map-place, .map-scale, .map-north", { autoAlpha: 0, y: 12, stagger: 0.07, duration: 0.7, ease: "power2.out" }, 1.2);
 
   gsap.from(".color-swatches span", { y: 50, rotate: (i) => (i % 2 ? 8 : -8), autoAlpha: 0, stagger: 0.1, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: ".color-swatches", start: "top 90%", once: true } });
   gsap.fromTo(".red-paper-manifesto strong", { scale: 0.86, letterSpacing: "0.02em" }, { scale: 1, letterSpacing: "-0.04em", ease: "none", scrollTrigger: { trigger: ".red-paper-manifesto", start: "top 90%", end: "center 50%", scrub: true } });
@@ -422,11 +469,6 @@ if (animate) {
   /* ----- Phần 05 ----- */
   gsap.fromTo(".classroom-photo img", { clipPath: "inset(0 100% 0 0)", scale: 1.1 }, { clipPath: "inset(0 0% 0 0)", scale: 1, duration: 1.6, ease: "expo.out", scrollTrigger: { trigger: ".classroom-visual", start: "top 75%", once: true } });
 
-  /* ----- Ảnh hiện trường ----- */
-  $$(".field-photo-frame").forEach((frame) => {
-    gsap.fromTo(frame, { clipPath: "inset(8% 5% 8% 5% round 4px)" }, { clipPath: "inset(0% 0% 0% 0% round 4px)", ease: "none", scrollTrigger: { trigger: frame, start: "top 95%", end: "top 35%", scrub: true } });
-    gsap.fromTo($("img", frame), { yPercent: -7 }, { yPercent: 7, ease: "none", scrollTrigger: { trigger: frame, start: "top bottom", end: "bottom top", scrub: true } });
-  });
   gsap.from(".identity-photos figure", { y: 60, rotate: (i) => (i ? 4 : -4), autoAlpha: 0, stagger: 0.15, duration: 1.3, ease: "expo.out", scrollTrigger: { trigger: ".identity-photos", start: "top 85%", once: true } });
   gsap.from(".four-traditions i", { y: 30, autoAlpha: 0, stagger: 0.08, duration: 1, ease: "expo.out", clearProps: "all", scrollTrigger: { trigger: ".four-traditions", start: "top 88%", once: true } });
   gsap.from(".dream-grid li", { x: 40, autoAlpha: 0, stagger: 0.12, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: ".dream-grid", start: "top 80%", once: true } });
