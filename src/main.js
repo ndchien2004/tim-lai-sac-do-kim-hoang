@@ -356,7 +356,7 @@ if (animate) {
   gsap.to(".scroll-cue", { autoAlpha: 0, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "15% top", scrub: true } });
 
   /* ----- Hiện dần chung ----- */
-  const special = ".print-trio, .loss-sequence, .numbers-band, .color-swatches, .timeline-wrap, .pull-quote, .loss-quote, .final-quote, .identity-question";
+  const special = ".print-trio, .loss-sequence, .numbers-band, .color-swatches, .timeline-wrap, .pull-quote, .loss-quote, .final-quote, .identity-question, .method-steps";
   $$(".reveal").forEach((el) => {
     if (el.matches(special) || el.parentElement.closest(special)) return;
     gsap.fromTo(
@@ -371,6 +371,7 @@ if (animate) {
     [".print-trio", ".print-card", { y: 80, rotate: (i) => [-3, 1.5, -1][i] || 0 }],
     [".loss-sequence", ".loss-card", { y: 60 }],
     [".numbers-band", ":scope > div", { y: 40 }],
+    [".method-steps", ":scope > li", { y: 50 }],
   ].forEach(([wrapSel, childSel, from]) => {
     $$(wrapSel).forEach((wrap) => {
       gsap.set(wrap, { autoAlpha: 1 });
