@@ -217,21 +217,6 @@ $$(".video-slot").forEach((slot) => {
   });
 });
 
-const compare = $("#compare");
-const range = $("#compareRange");
-function setCompare(v) {
-  compare.style.setProperty("--pos", v + "%");
-  range.value = v;
-}
-function sizeCompare() {
-  compare.style.setProperty("--compare-w", compare.offsetWidth + "px");
-}
-range.addEventListener("input", () => setCompare(range.value));
-range.addEventListener("pointerdown", () => compare.classList.add("is-dragging"));
-window.addEventListener("pointerup", () => compare.classList.remove("is-dragging"));
-new ResizeObserver(sizeCompare).observe(compare);
-setCompare(range.value);
-
 /* --------------------------------------------------------------------------
    Dòng thời gian: gợi ý thao tác theo thiết bị
    -------------------------------------------------------------------------- */
@@ -451,13 +436,6 @@ if (animate) {
   gsap.fromTo(".process-intro strong", { scale: 0.8, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, ease: "none", scrollTrigger: { trigger: ".process-intro", start: "top 85%", end: "center 55%", scrub: true } });
   gsap.to("#processDisc", { rotate: 120, ease: "none", scrollTrigger: { trigger: ".process-layout", start: "top bottom", end: "bottom top", scrub: true } });
   gsap.to(".process-rooster-mini", { rotate: -126, ease: "none", scrollTrigger: { trigger: ".process-layout", start: "top bottom", end: "bottom top", scrub: true } });
-
-  // Thanh so sánh tự "lướt" một lần để gợi ý
-  const demo = { v: 50 };
-  gsap.timeline({ scrollTrigger: { trigger: compare, start: "top 70%", once: true } })
-    .to(demo, { v: 22, duration: 0.9, ease: "power2.inOut", onUpdate: () => setCompare(demo.v) })
-    .to(demo, { v: 74, duration: 1.1, ease: "power2.inOut", onUpdate: () => setCompare(demo.v) })
-    .to(demo, { v: 50, duration: 0.8, ease: "power2.inOut", onUpdate: () => setCompare(demo.v) });
 
   $$(".step-photo img").forEach((img) => {
     gsap.fromTo(img, { clipPath: "inset(0 0 100% 0)", scale: 1.12 }, { clipPath: "inset(0 0 0% 0)", scale: 1, duration: 1.4, ease: "expo.out", scrollTrigger: { trigger: img, start: "top 85%", once: true } });
