@@ -2994,3 +2994,39 @@ img.video-poster { object-fit: cover; transform: scale(1.02); transition: transf
 .references li::marker { color: var(--gold); }
 .references a { color: var(--paper); text-underline-offset: 2px; word-break: break-word; }
 .identity-question h3 { font-size: clamp(1.9rem, 4.4vw, 3.7rem); line-height: 1.08; max-width: 22ch; }
+
+/* Gieo mầm di sản: một ví dụ ngắn thay cho Phần 05 */
+.school-note { padding: clamp(3.5rem, 7vw, 6rem) var(--gutter) 0; background: var(--page); }
+.school-card {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--red);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.school-photo { margin: 0; overflow: hidden; border-radius: calc(var(--radius) - 2px); aspect-ratio: 4 / 3; }
+.school-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.school-copy { padding: clamp(0.25rem, 1.5vw, 1rem) clamp(0.25rem, 1.5vw, 1rem) clamp(0.25rem, 1.5vw, 1rem) 0; }
+.school-copy span {
+  font: 600 0.72rem/1 var(--f-ui);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.school-copy h2 { margin: 0.75rem 0 0.9rem; font: italic 600 clamp(1.5rem, 2.8vw, 2.1rem)/1.12 var(--f-display); letter-spacing: -0.01em; }
+.school-copy p { font: 400 1.02rem/1.72 var(--f-text); color: var(--ink-2); }
+@media (max-width: 760px) {
+  .school-card { grid-template-columns: 1fr; }
+  .school-copy { padding: 0 0.25rem 0.5rem; }
+}
+
+/* Ảnh minh họa đơn lẻ giữa bài */
+.story-photo { max-width: 26rem; margin: clamp(2.5rem, 5vw, 4rem) auto; }
+.story-photo img { width: 100%; height: auto; display: block; border-radius: var(--radius); }
+.story-photo figcaption { margin-top: 0.75rem; font: 400 0.84rem/1.55 var(--f-ui); color: var(--ink-3); text-align: center; }

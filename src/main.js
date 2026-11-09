@@ -467,24 +467,10 @@ if (animate) {
   gsap.from(".glyph", { y: 30, rotate: (i) => [-6, 4, 8][i], autoAlpha: 0, stagger: 0.12, duration: 1.1, ease: "back.out(1.6)", scrollTrigger: { trigger: ".glyph-card", start: "top 80%", once: true } });
   gsap.from(".hand-steps li", { y: 24, autoAlpha: 0, stagger: 0.12, duration: 0.9, ease: "expo.out", scrollTrigger: { trigger: ".hand-steps", start: "top 85%", once: true } });
 
-  /* ----- Phần 05 ----- */
-  gsap.fromTo(".classroom-photo img", { clipPath: "inset(0 100% 0 0)", scale: 1.1 }, { clipPath: "inset(0 0% 0 0)", scale: 1, duration: 1.6, ease: "expo.out", scrollTrigger: { trigger: ".classroom-visual", start: "top 75%", once: true } });
+  /* ----- Gieo mầm di sản ----- */
+  gsap.fromTo(".school-photo img", { clipPath: "inset(0 100% 0 0)", scale: 1.1 }, { clipPath: "inset(0 0% 0 0)", scale: 1, duration: 1.4, ease: "expo.out", scrollTrigger: { trigger: ".school-card", start: "top 80%", once: true } });
 
   gsap.from(".identity-photos figure", { y: 60, rotate: (i) => (i ? 4 : -4), autoAlpha: 0, stagger: 0.15, duration: 1.3, ease: "expo.out", scrollTrigger: { trigger: ".identity-photos", start: "top 85%", once: true } });
-  gsap.from(".four-traditions i", { y: 30, autoAlpha: 0, stagger: 0.08, duration: 1, ease: "expo.out", clearProps: "all", scrollTrigger: { trigger: ".four-traditions", start: "top 88%", once: true } });
-  gsap.from(".dream-grid li", { x: 40, autoAlpha: 0, stagger: 0.12, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: ".dream-grid", start: "top 80%", once: true } });
-
-  // Tờ tranh được nhấc khỏi ván in
-  const fp = $(".final-print");
-  const fpPaths = $$(".final-paper svg path", fp);
-  prepStroke(fpPaths);
-  const lift = gsap.timeline({ scrollTrigger: { trigger: fp, start: "top 80%", end: "bottom 40%", scrub: 0.8 } });
-  lift
-    .fromTo(".printing-hand", { y: -60, autoAlpha: 0 }, { y: 0, autoAlpha: 1, ease: "power2.out", duration: 0.15 }, 0)
-    .fromTo(".printing-hand", { yPercent: 0 }, { y: () => fp.offsetHeight * 0.72, ease: "power1.inOut", duration: 0.5 }, 0.15)
-    .to(fpPaths, { strokeDashoffset: 0, ease: "power1.inOut", stagger: 0.04, duration: 0.5 }, 0.15)
-    .to(".printing-hand", { autoAlpha: 0, ease: "power1.in", duration: 0.15 }, 0.65)
-    .fromTo(".final-paper", { rotateX: 0, y: 0, transformPerspective: 900 }, { rotateX: 14, y: -28, rotate: -3, ease: "power1.inOut", duration: 0.35 }, 0.65);
 
   /* ----- Footer ----- */
   gsap.from(".footer-stamp", { rotate: -40, scale: 1.6, autoAlpha: 0, duration: 1, ease: "back.out(1.8)", scrollTrigger: { trigger: ".site-footer", start: "top 80%", once: true } });
